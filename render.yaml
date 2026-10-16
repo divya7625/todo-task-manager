@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: todo-task-manager
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      # On the free plan the disk is wiped on every redeploy/restart.
+      # For permanent storage: upgrade, add a Disk mounted at /var/data,
+      # and set DB_PATH to /var/data/tasks.db
+      # - key: DB_PATH
+      #   value: /var/data/tasks.db
